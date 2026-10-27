@@ -1,0 +1,66 @@
+0 verbose cli D:\Program Files\node.js\node.exe D:\Program Files\node.js\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.12.1
+2 info using node@v25.9.0
+3 silly config load:file:D:\Program Files\node.js\node_modules\npm\npmrc
+4 silly config load:file:E:\CodeSet\ai-company\.npmrc
+5 silly config load:file:C:\Users\lenovo\.npmrc
+6 silly config load:file:C:\Users\lenovo\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm install
+8 verbose argv "install" "--cache" ".npm-cache" "--no-audit"
+9 verbose logfile logs-max:10 dir:E:\CodeSet\ai-company\.npm-cache\_logs\2026-10-27T04_19_36_838Z-
+10 verbose logfile E:\CodeSet\ai-company\.npm-cache\_logs\2026-10-27T04_19_36_838Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+13 silly idealTree buildDeps
+14 silly fetch manifest @types/node@latest
+15 silly packumentCache full:https://registry.npmmirror.com/@types%2fnode cache-miss
+16 http cache https://registry.npmmirror.com/@types%2fnode 44ms (cache hit)
+17 silly packumentCache full:https://registry.npmmirror.com/@types%2fnode set size:10428418 disposed:false
+18 silly fetch manifest @types/react@latest
+19 silly packumentCache full:https://registry.npmmirror.com/@types%2freact cache-miss
+20 http fetch GET 200 https://registry.npmmirror.com/@types%2freact 1279ms (cache miss)
+21 silly packumentCache full:https://registry.npmmirror.com/@types%2freact set size:337955 disposed:false
+22 silly fetch manifest @types/react-dom@latest
+23 silly packumentCache full:https://registry.npmmirror.com/@types%2freact-dom cache-miss
+24 http fetch GET 200 https://registry.npmmirror.com/@types%2freact-dom 728ms (cache miss)
+25 silly packumentCache full:https://registry.npmmirror.com/@types%2freact-dom set size:85388 disposed:false
+26 silly placeDep ROOT @types/node@26.6.5 OK for: aether-ai-company@0.0.0 want: latest
+27 silly placeDep ROOT @types/react@19.3.0 OK for: aether-ai-company@0.0.0 want: latest
+28 silly placeDep ROOT @types/react-dom@19.3.0 OK for: aether-ai-company@0.0.0 want: latest
+29 silly fetch manifest undici-types@~8.9.0
+30 silly packumentCache full:https://registry.npmmirror.com/undici-types cache-miss
+31 silly fetch manifest csstype@^3.2.2
+32 silly packumentCache full:https://registry.npmmirror.com/csstype cache-miss
+33 http fetch GET 200 https://registry.npmmirror.com/csstype 624ms (cache miss)
+34 silly packumentCache full:https://registry.npmmirror.com/csstype set size:41498 disposed:false
+35 http fetch GET 200 https://registry.npmmirror.com/undici-types 677ms (cache miss)
+36 silly packumentCache full:https://registry.npmmirror.com/undici-types set size:53965 disposed:false
+37 silly placeDep ROOT undici-types@8.9.0 OK for: @types/node@26.6.5 want: ~8.9.0
+38 silly placeDep ROOT csstype@3.2.3 OK for: @types/react@19.3.0 want: ^3.2.2
+39 silly reify moves {}
+40 http cache csstype@https://registry.npmmirror.com/csstype/-/csstype-3.2.3.tgz 0ms (cache hit)
+41 http cache undici-types@https://registry.npmmirror.com/undici-types/-/undici-types-8.9.0.tgz 0ms (cache hit)
+42 silly tarball no local data for csstype@https://registry.npmmirror.com/csstype/-/csstype-3.2.3.tgz. Extracting by manifest.
+43 silly tarball no local data for undici-types@https://registry.npmmirror.com/undici-types/-/undici-types-8.9.0.tgz. Extracting by manifest.
+44 http cache @types/node@https://registry.npmmirror.com/@types/node/-/node-26.6.5.tgz 0ms (cache hit)
+45 http cache @types/react@https://registry.npmmirror.com/@types/react/-/react-19.3.0.tgz 0ms (cache hit)
+46 http cache @types/react-dom@https://registry.npmmirror.com/@types/react-dom/-/react-dom-19.3.0.tgz 0ms (cache hit)
+47 silly tarball no local data for @types/node@https://registry.npmmirror.com/@types/node/-/node-26.6.5.tgz. Extracting by manifest.
+48 silly tarball no local data for @types/react@https://registry.npmmirror.com/@types/react/-/react-19.3.0.tgz. Extracting by manifest.
+49 silly tarball no local data for @types/react-dom@https://registry.npmmirror.com/@types/react-dom/-/react-dom-19.3.0.tgz. Extracting by manifest.
+50 http fetch GET 200 https://cdn.npmmirror.com/packages/%40types/react-dom/19.3.0/react-dom-19.3.0.tgz 1470ms (cache miss)
+51 http fetch GET 200 https://cdn.npmmirror.com/packages/%40types/react/19.3.0/react-19.3.0.tgz 1642ms (cache miss)
+52 http fetch GET 200 https://cdn.npmmirror.com/packages/csstype/3.2.3/csstype-3.2.3.tgz 1658ms (cache miss)
+53 http fetch GET 200 https://cdn.npmmirror.com/packages/%40types/node/26.6.5/node-26.6.5.tgz 1850ms (cache miss)
+54 http fetch GET 200 https://cdn.npmmirror.com/packages/undici-types/8.9.0/undici-types-8.9.0.tgz 2195ms (cache miss)
+55 silly ADD node_modules/csstype
+56 silly ADD node_modules/undici-types
+57 silly ADD node_modules/@types/react-dom
+58 silly ADD node_modules/@types/react
+59 silly ADD node_modules/@types/node
+60 verbose cwd E:\CodeSet\ai-company
+61 verbose os Windows_NT 10.0.22631
+62 verbose node v25.9.0
+63 verbose npm  v11.12.1
+64 verbose exit 0
+65 info ok
