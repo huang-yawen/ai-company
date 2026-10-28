@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
+import type { ReactNode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles.css'
 
-type View = 'home' | 'signup' | 'workspace' | 'products' | 'courses'
+type View = 'home' | 'signup' | 'workspace' | 'products' | 'courses' | 'pricing' | 'about' | 'contact' | 'security' | 'privacy' | 'terms'
 
 const Arrow = () => <span className="arrow">↗</span>
 const Spark = () => <span className="spark">✦</span>
@@ -46,7 +47,7 @@ function Stats() {
 function Home({ setView }: { setView: (view: View) => void }) {
   const goSignup = () => setView('signup')
   return <main className="site-shell">
-    <nav className="nav"><Logo /><div className="nav-links"><button onClick={() => setView('products')}>Products</button><button onClick={() => setView('courses')}>Academy</button><a href="#solutions">Solutions</a><a href="#insights">Insights</a></div><div className="nav-actions"><button className="text-btn" onClick={() => setView('workspace')}>Sign in</button><button className="nav-cta" onClick={goSignup}>Get started <Arrow /></button></div></nav>
+    <nav className="nav"><Logo /><div className="nav-links"><button onClick={() => setView('products')}>Products</button><button onClick={() => setView('courses')}>Academy</button><a href="#solutions">Solutions</a><button onClick={() => setView('about')}>Company</button></div><div className="nav-actions"><button className="text-btn" onClick={() => setView('workspace')}>Sign in</button><button className="nav-cta" onClick={goSignup}>Get started <Arrow /></button></div></nav>
 
     <section className="hero">
       <div className="hero-copy">
@@ -73,13 +74,13 @@ function Home({ setView }: { setView: (view: View) => void }) {
     <section className="products" id="solutions"><div className="product-intro"><div><span className="overline">THE BITWISEPLUS SYSTEM</span><h2>From curiosity<br />to capability.</h2></div><p>Everything your organization needs to work intelligently, in one considered system.</p></div><div className="product-grid">
       <article className="product-card product-dark"><div className="card-top"><span className="number">01</span><span className="tag">CORE PLATFORM</span></div><div className="card-art workflow"><div className="flow-node main">Campaign brief</div><div className="flow-line"></div><div className="flow-node">Audience</div><div className="flow-node">Concepts</div><div className="flow-node result">Launch plan ✦</div></div><h3>BitwisePlus Studio</h3><p>Your secure AI workspace for turning scattered knowledge into repeatable, high-value work.</p><button onClick={() => setView('products')}>Discover Studio <Arrow /></button></article>
       <article className="product-card product-mint"><div className="card-top"><span className="number">02</span><span className="tag">TEAM LEARNING</span></div><div className="card-art lessons"><div className="lesson-progress"><span>YOUR PATH</span><b>68%</b></div><div className="lesson-line"><i></i><i></i><i className="done"></i><i className="done"></i><i className="done"></i></div><div className="lesson-title">Prompting for<br />better decisions</div></div><h3>BitwisePlus Academy</h3><p>Practical learning paths that move your people from AI-aware to AI-native.</p><button onClick={() => setView('courses')}>Browse programs <Arrow /></button></article>
-      <article className="product-card product-lilac"><div className="card-top"><span className="number">03</span><span className="tag">EXPERT PARTNERSHIP</span></div><div className="card-art orbit"><div className="orbit-core">A</div><i className="planet p1"></i><i className="planet p2"></i><i className="planet p3"></i><div className="orbit-ring"></div></div><h3>BitwisePlus Advisory</h3><p>Hands-on partnership for leaders turning AI ambition into an operating advantage.</p><button onClick={goSignup}>Meet our experts <Arrow /></button></article>
+      <article className="product-card product-lilac"><div className="card-top"><span className="number">03</span><span className="tag">EXPERT PARTNERSHIP</span></div><div className="card-art orbit"><div className="orbit-core">A</div><i className="planet p1"></i><i className="planet p2"></i><i className="planet p3"></i><div className="orbit-ring"></div></div><h3>BitwisePlus Advisory</h3><p>Hands-on partnership for leaders turning AI ambition into an operating advantage.</p><button onClick={() => setView('contact')}>Meet our experts <Arrow /></button></article>
     </div></section>
 
     <section className="academy" id="academy"><div className="academy-panel"><div className="academy-copy"><span className="overline">BITWISEPLUS ACADEMY</span><h2>Learning that<br /><em>changes the work.</em></h2><p>Role-specific programs made for the practical reality of your team, not a distant future.</p><button className="dark-btn" onClick={goSignup}>Explore the Academy <Arrow /></button></div><div className="learning-list"><div className="list-head"><span>POPULAR PATHS</span><span>VIEW ALL →</span></div><div className="path"><b>01</b><div><strong>AI Foundations for Teams</strong><small>6 modules · 4 hours</small></div><span className="path-arrow">↗</span></div><div className="path"><b>02</b><div><strong>AI-Powered Marketing</strong><small>8 modules · 6 hours</small></div><span className="path-arrow">↗</span></div><div className="path"><b>03</b><div><strong>Leading in the AI Era</strong><small>5 modules · 3 hours</small></div><span className="path-arrow">↗</span></div></div></div></section>
 
     <section className="cta"><div className="cta-star">✦</div><span className="overline">START WHERE YOU ARE</span><h2>The future of work<br />has a <em>starting point.</em></h2><p>Join teams building a more capable, creative way to work.</p><button className="light-btn" onClick={goSignup}>Create your workspace <Arrow /></button></section>
-    <footer><Logo /><span>© 2026 BitwisePlus AI, Inc.</span><div><a>Privacy</a><a>Terms</a><a>Contact</a></div></footer>
+    <footer><Logo /><span>© 2026 BitwisePlus AI, Inc.</span><FooterLinks setView={setView}/></footer>
   </main>
 }
 
@@ -97,7 +98,7 @@ const productData: [string, string, string, string, string, string[]][] = [
 function ProductPage({setView}:{setView:(view:View)=>void}) {
   const [selected, setSelected] = useState(0)
   const product = productData[selected]
-  return <main className="catalog-page"><nav className="nav catalog-nav"><button className="brand-button" onClick={() => setView('home')}><Logo/></button><div className="nav-links"><button className="selected-nav" onClick={() => setView('products')}>Products</button><button onClick={() => setView('courses')}>Academy</button><a href="#compare">Compare plans</a></div><div className="nav-actions"><button className="text-btn" onClick={() => setView('workspace')}>Sign in</button><button className="nav-cta" onClick={() => setView('signup')}>Get started <Arrow/></button></div></nav><section className="catalog-hero"><span className="overline">PRODUCTS</span><h1>Systems for the<br/><em>work ahead.</em></h1><p>Designed for teams who want AI to become a real operating advantage, not another tab in the browser.</p></section><section className="product-tabs">{productData.map((item,i)=><button key={item[0]} className={i===selected?'tab-active':''} onClick={()=>setSelected(i)}><span>0{i+1}</span>{item[0]}</button>)}</section><section className="product-focus"><div className="product-preview"><div className={'preview-art preview-'+selected}><div className="preview-header"><span>{product[4]}</span><i></i><i></i></div><div className="preview-body"><div className="preview-side"><b>Overview</b><b>Workspace</b><b>Team</b></div><div className="preview-content"><small>WORKFLOW IN PROGRESS</small><h3>{selected===0?'Plan a high-stakes launch':selected===1?'Your AI capability roadmap':'AI adoption signal report'}</h3><div className="preview-bars"><i></i><i></i><i></i></div></div></div></div></div><div className="product-detail"><span className="overline">{product[4]}</span><h2>{product[0]}<span>.</span></h2><p>{product[1]}</p><ul>{product[5].map(x=><li key={x}><span>✦</span>{x}</li>)}</ul><div className="price"><strong>{product[2]}</strong><small>{product[3]}</small></div><button className="primary-btn" onClick={() => setView('signup')}>Start with {product[0]} <Arrow/></button><button className="demo-btn">Talk to an expert →</button></div></section><section className="plan-strip" id="compare"><span>BUILT FOR REAL TEAMS</span><b>No set-up fee. Flexible team billing. Enterprise security.</b><button onClick={() => setView('signup')}>Compare plans →</button></section><footer><Logo/><span>© 2026 BitwisePlus AI, Inc.</span><div><a>Privacy</a><a>Terms</a><a>Contact</a></div></footer></main>
+  return <main className="catalog-page"><nav className="nav catalog-nav"><button className="brand-button" onClick={() => setView('home')}><Logo/></button><div className="nav-links"><button className="selected-nav" onClick={() => setView('products')}>Products</button><button onClick={() => setView('courses')}>Academy</button><a href="#compare">Compare plans</a></div><div className="nav-actions"><button className="text-btn" onClick={() => setView('workspace')}>Sign in</button><button className="nav-cta" onClick={() => setView('signup')}>Get started <Arrow/></button></div></nav><section className="catalog-hero"><span className="overline">PRODUCTS</span><h1>Systems for the<br/><em>work ahead.</em></h1><p>Designed for teams who want AI to become a real operating advantage, not another tab in the browser.</p></section><section className="product-tabs">{productData.map((item,i)=><button key={item[0]} className={i===selected?'tab-active':''} onClick={()=>setSelected(i)}><span>0{i+1}</span>{item[0]}</button>)}</section><section className="product-focus"><div className="product-preview"><div className={'preview-art preview-'+selected}><div className="preview-header"><span>{product[4]}</span><i></i><i></i></div><div className="preview-body"><div className="preview-side"><b>Overview</b><b>Workspace</b><b>Team</b></div><div className="preview-content"><small>WORKFLOW IN PROGRESS</small><h3>{selected===0?'Plan a high-stakes launch':selected===1?'Your AI capability roadmap':'AI adoption signal report'}</h3><div className="preview-bars"><i></i><i></i><i></i></div></div></div></div></div><div className="product-detail"><span className="overline">{product[4]}</span><h2>{product[0]}<span>.</span></h2><p>{product[1]}</p><ul>{product[5].map(x=><li key={x}><span>✦</span>{x}</li>)}</ul><div className="price"><strong>{product[2]}</strong><small>{product[3]}</small></div><button className="primary-btn" onClick={() => setView(selected === 2 ? 'contact' : 'signup')}>{selected === 2 ? 'Book a consultation' : 'Start with ' + product[0]} <Arrow/></button><button className="demo-btn" onClick={() => setView('contact')}>Talk to an expert →</button></div></section><section className="plan-strip" id="compare"><span>BUILT FOR REAL TEAMS</span><b>No set-up fee. Flexible team billing. Enterprise security.</b><button onClick={() => setView('pricing')}>Compare plans →</button></section><footer><Logo/><span>© 2026 BitwisePlus AI, Inc.</span><FooterLinks setView={setView}/></footer></main>
 }
 
 const videos = [
@@ -109,7 +110,7 @@ const videos = [
 
 function CoursesPage({setView}:{setView:(view:View)=>void}) {
   const [active, setActive] = useState<typeof videos[0] | null>(null)
-  return <main className="courses-page"><nav className="nav catalog-nav"><button className="brand-button" onClick={() => setView('home')}><Logo/></button><div className="nav-links"><button onClick={() => setView('products')}>Products</button><button className="selected-nav" onClick={() => setView('courses')}>Academy</button><a href="#library">Library</a></div><div className="nav-actions"><button className="text-btn" onClick={() => setView('workspace')}>Sign in</button><button className="nav-cta" onClick={() => setView('signup')}>Join Academy <Arrow/></button></div></nav><section className="course-hero"><div><span className="overline">BITWISEPLUS ACADEMY</span><h1>Learn the work<br/><em>AI makes possible.</em></h1><p>Practical, role-aware learning for people building capability together.</p><button className="primary-btn" onClick={() => document.getElementById('library')?.scrollIntoView({behavior:'smooth'})}>Explore learning paths <Arrow/></button></div><div className="featured-course"><div className="video-surface"><img src="https://i.ytimg.com/vi/tchN4xa4pfg/hqdefault.jpg" alt="AI Foundations course preview"/><button onClick={() => setActive(videos[0])}>▶</button><span>FEATURED CLASS</span></div><div className="featured-meta"><div><small>START HERE · 4H 31M</small><h3>AI Foundations for<br/>Absolute Beginners</h3><p>Learn the language, concepts and practical decisions behind modern AI.</p></div><button onClick={() => setActive(videos[0])}>Watch preview ↗</button></div></div></section><section className="learning-library" id="library"><div className="library-head"><div><span className="overline">LEARNING LIBRARY</span><h2>Pick your<br/>next <em>practice.</em></h2></div><div className="filter-row"><button className="filter-active">All paths</button><button>Foundations</button><button>Build</button><button>Leadership</button></div></div><div className="course-grid">{videos.map((video,i)=><article className="course-card" key={i}><button className="thumb" onClick={() => setActive(video)}><img src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`} alt=""/><span>▶</span><small>{video.level}</small></button><div className="course-card-copy"><span>{video.time} · {video.channel}</span><h3>{video.title}</h3><button onClick={() => setActive(video)}>Preview course <Arrow/></button></div></article>)}</div></section><section className="academy-join"><span className="overline">LEARN TOGETHER</span><h2>Your team’s next<br/>capability <em>starts here.</em></h2><button className="dark-btn" onClick={() => setView('signup')}>Create a team cohort <Arrow/></button></section>{active && <div className="video-modal" onClick={() => setActive(null)}><div className="video-dialog" onClick={e=>e.stopPropagation()}><button className="close-video" onClick={() => setActive(null)}>×</button><iframe src={`https://www.youtube-nocookie.com/embed/${active.id}?autoplay=1`} title={active.title} allow="autoplay; encrypted-media" allowFullScreen></iframe><div><span className="overline">{active.level} · {active.time}</span><h2>{active.title}</h2><p>Preview a public lesson, then create a BitwisePlus account to save the pathway to your workspace.</p><button className="primary-btn" onClick={() => setView('signup')}>Save this path <Arrow/></button></div></div></div>}<footer><Logo/><span>© 2026 BitwisePlus AI, Inc.</span><div><a>Privacy</a><a>Terms</a><a>Contact</a></div></footer></main>
+  return <main className="courses-page"><nav className="nav catalog-nav"><button className="brand-button" onClick={() => setView('home')}><Logo/></button><div className="nav-links"><button onClick={() => setView('products')}>Products</button><button className="selected-nav" onClick={() => setView('courses')}>Academy</button><a href="#library">Library</a></div><div className="nav-actions"><button className="text-btn" onClick={() => setView('workspace')}>Sign in</button><button className="nav-cta" onClick={() => setView('signup')}>Join Academy <Arrow/></button></div></nav><section className="course-hero"><div><span className="overline">BITWISEPLUS ACADEMY</span><h1>Learn the work<br/><em>AI makes possible.</em></h1><p>Practical, role-aware learning for people building capability together.</p><button className="primary-btn" onClick={() => document.getElementById('library')?.scrollIntoView({behavior:'smooth'})}>Explore learning paths <Arrow/></button></div><div className="featured-course"><div className="video-surface"><img src="https://i.ytimg.com/vi/tchN4xa4pfg/hqdefault.jpg" alt="AI Foundations course preview"/><button onClick={() => setActive(videos[0])}>▶</button><span>FEATURED CLASS</span></div><div className="featured-meta"><div><small>START HERE · 4H 31M</small><h3>AI Foundations for<br/>Absolute Beginners</h3><p>Learn the language, concepts and practical decisions behind modern AI.</p></div><button onClick={() => setActive(videos[0])}>Watch preview ↗</button></div></div></section><section className="learning-library" id="library"><div className="library-head"><div><span className="overline">LEARNING LIBRARY</span><h2>Pick your<br/>next <em>practice.</em></h2></div><div className="filter-row"><button className="filter-active">All paths</button><button>Foundations</button><button>Build</button><button>Leadership</button></div></div><div className="course-grid">{videos.map((video,i)=><article className="course-card" key={i}><button className="thumb" onClick={() => setActive(video)}><img src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`} alt=""/><span>▶</span><small>{video.level}</small></button><div className="course-card-copy"><span>{video.time} · {video.channel}</span><h3>{video.title}</h3><button onClick={() => setActive(video)}>Preview course <Arrow/></button></div></article>)}</div></section><section className="academy-join"><span className="overline">LEARN TOGETHER</span><h2>Your team’s next<br/>capability <em>starts here.</em></h2><button className="dark-btn" onClick={() => setView('signup')}>Create a team cohort <Arrow/></button></section>{active && <div className="video-modal" onClick={() => setActive(null)}><div className="video-dialog" onClick={e=>e.stopPropagation()}><button className="close-video" onClick={() => setActive(null)}>×</button><iframe src={`https://www.youtube-nocookie.com/embed/${active.id}?autoplay=1`} title={active.title} allow="autoplay; encrypted-media" allowFullScreen></iframe><div><span className="overline">{active.level} · {active.time}</span><h2>{active.title}</h2><p>Preview a public lesson, then create a BitwisePlus account to save the pathway to your workspace.</p><button className="primary-btn" onClick={() => setView('signup')}>Save this path <Arrow/></button></div></div></div>}<footer><Logo/><span>© 2026 BitwisePlus AI, Inc.</span><FooterLinks setView={setView}/></footer></main>
 }
 
 type WsTab = 'overview' | 'learn' | 'studio' | 'library'
@@ -280,9 +281,123 @@ function Workspace({setView}: {setView:(view:View)=>void}) {
   return <main className="workspace"><header className="workspace-nav"><Logo/><div className="workspace-center">{wsTabs.map(([k, label]) => <span key={k} className={tab === k ? 'active' : ''} onClick={() => goTab(k)}>{label}</span>)}</div><div className="user-pill" onClick={() => setView('home')} title="Back to home"><span>MH</span> Morgan Hale <i>⌄</i></div></header><div className="workspace-main"><aside className="workspace-side"><small>YOUR WORKSPACE</small><b>Northstar Studio <i>⌄</i></b><div className="side-nav">{wsTabs.map(([k, label]) => <span key={k} className={tab === k ? 'selected' : ''} onClick={() => goTab(k)}>{label}</span>)}</div><small>SUPPORT</small><div className="side-nav"><span onClick={() => setToast('Support will reply within a day')}>◉ Get help</span></div><div className="upgrade"><Spark/><b>Build more with your team.</b><p>Invite members to unlock shared learning.</p><button onClick={invite}>Invite team →</button></div></aside><section className="dashboard"><div className="ws-mtabs">{wsTabs.map(([k, label]) => <button key={k} className={tab === k ? 'on' : ''} onClick={() => goTab(k)}>{label}</button>)}</div>{tab === 'overview' ? overview : tab === 'learn' ? learn : tab === 'studio' ? studio : library}</section></div>{toast && <div className="ws-toast">{toast}</div>}</main>
 }
 
+// 公司页面：Pricing / About / Contact / Security / Privacy / Terms 共用的页面框架
+const FooterLinks = ({ setView }: { setView: (view: View) => void }) => <div>{([['Pricing', 'pricing'], ['About', 'about'], ['Security', 'security'], ['Privacy', 'privacy'], ['Terms', 'terms'], ['Contact', 'contact']] as [string, View][]).map(([label, v]) => <a key={v} href={'/' + v} onClick={e => { e.preventDefault(); setView(v) }}>{label}</a>)}</div>
+
+function InfoPage({ setView, current, kicker, title, lead, aside, children }: { setView: (view: View) => void; current: View; kicker: string; title: ReactNode; lead: string; aside?: ReactNode; children: ReactNode }) {
+  const heroText = <><span className="overline">{kicker}</span><h1>{title}</h1><p>{lead}</p></>
+  const link = (v: View, label: string) => <button className={current === v ? 'selected-nav' : ''} onClick={() => setView(v)}>{label}</button>
+  return <main className="catalog-page"><nav className="nav catalog-nav"><button className="brand-button" onClick={() => setView('home')}><Logo/></button><div className="nav-links">{link('products', 'Products')}{link('courses', 'Academy')}{link('pricing', 'Pricing')}{link('about', 'About')}</div><div className="nav-actions"><button className="text-btn" onClick={() => setView('workspace')}>Sign in</button><button className="nav-cta" onClick={() => setView('signup')}>Get started <Arrow/></button></div></nav>{aside ? <section className="catalog-hero with-aside"><div>{heroText}</div>{aside}</section> : <section className="catalog-hero">{heroText}</section>}{children}<footer><Logo/><span>© 2026 BitwisePlus AI, Inc.</span><FooterLinks setView={setView}/></footer></main>
+}
+
+function PricingPage({ setView }: { setView: (view: View) => void }) {
+  const rows: [string, string, string, string][] = [
+    ['Best for', 'Teams running daily AI work', 'Teams building AI skills', 'Leaders setting AI direction'],
+    ['Billing', 'Per member / month', 'Per learner / month', 'Per engagement'],
+    ['Getting started', 'Self-serve in minutes', 'Self-serve, team cohorts on request', 'Scoped with an expert'],
+    ['Support', 'Email, within 1 business day', 'Email, within 1 business day', 'Dedicated expert lead']
+  ]
+  const faqs: [string, string][] = [
+    ['Can we mix products?', 'Yes. Studio, Academy and Advisory are designed to work together, and billing can be combined under one team account.'],
+    ['Is there a set-up fee?', 'No. Studio and Academy have no set-up fee. Advisory engagements are scoped and priced up front.'],
+    ['How does team billing work?', 'You pay per active member each month and can add or remove members at any time.'],
+    ['Do you offer enterprise terms?', 'Yes. Contact sales for volume pricing, security reviews and custom agreements.']
+  ]
+  return <InfoPage setView={setView} current="pricing" kicker="PRICING" title={<>Plans built for<br/><em>how teams work.</em></>} lead="Start with one product or combine all three. No set-up fee, flexible team billing.">
+    <section className="info-section"><div className="info-grid">{productData.map(p => <article className="info-card" key={p[0]}><span className="overline">{p[4]}</span><h3>{p[0]}</h3><p>{p[1]}</p><div className="plan-price"><strong>{p[2]}</strong><small>{p[3]}</small></div><ul>{p[5].map(x => <li key={x}><span>✦</span>{x}</li>)}</ul><button className="primary-btn" onClick={() => setView(p[0] === 'Advisory' ? 'contact' : 'signup')}>{p[0] === 'Advisory' ? 'Contact sales' : 'Start with ' + p[0]} <Arrow/></button></article>)}</div></section>
+    <section className="info-section"><span className="overline">COMPARE PLANS</span><h2>Side by side.</h2><div className="table-wrap"><table className="plan-table"><thead><tr><th></th>{productData.map(p => <th key={p[0]}>{p[0]}</th>)}</tr></thead><tbody>{rows.map(r => <tr key={r[0]}><th>{r[0]}</th><td>{r[1]}</td><td>{r[2]}</td><td>{r[3]}</td></tr>)}</tbody></table></div></section>
+    <section className="info-section"><span className="overline">FAQ</span><h2>Common questions.</h2><div className="faq">{faqs.map(f => <div key={f[0]}><b>{f[0]}</b><p>{f[1]}</p></div>)}</div></section>
+    <section className="plan-strip"><span>NEED SOMETHING CUSTOM?</span><b>Volume pricing, security reviews and custom agreements.</b><button onClick={() => setView('contact')}>Contact sales →</button></section>
+  </InfoPage>
+}
+
+function AboutPage({ setView }: { setView: (view: View) => void }) {
+  const principles: [string, string][] = [
+    ['Practice over hype', 'We measure AI by the work it improves, not by the demos it produces.'],
+    ['Capability compounds', 'Tools fade, skills stay. Every product is built to grow what your people can do.'],
+    ['Trust by default', 'Your data, your sources, your decisions. Security and privacy are part of the design.'],
+    ['Clear and considered', 'Fewer, better tools. Plain language. No noise.']
+  ]
+  const journey: [string, string, string][] = [
+    ['01', 'Learn', 'Role-based programs in Academy give every team a shared language and confidence with AI.'],
+    ['02', 'Build', 'Studio turns what people learn into secure, reusable workflows the whole team can run.'],
+    ['03', 'Scale', 'Advisory helps leaders connect it all to strategy, with a clear 90-day adoption plan.']
+  ]
+  const teams = ['Leadership', 'Operations', 'Marketing & Growth', 'Product & Engineering', 'People & Learning', 'Customer Success']
+  const aside = <div className="about-visual" aria-hidden="true"><div className="av-ring r1"></div><div className="av-ring r2"></div><div className="av-core">✦</div><span className="av-chip c1">Tools</span><span className="av-chip c2">Learning</span><span className="av-chip c3">Expertise</span></div>
+  return <InfoPage setView={setView} current="about" kicker="ABOUT BITWISEPLUS" title={<>AI that becomes<br/><em>everyday work.</em></>} lead="BitwisePlus helps organizations turn generative AI into measurable results with one connected system for tools, learning and expert guidance." aside={aside}>
+    <section className="info-section mission"><span className="overline">OUR MISSION</span><p>To make AI a practical, trusted part of how every team works, and to give people the skills to use it well.</p></section>
+    <section className="info-section"><span className="overline">WHAT WE DO</span><h2>One system, three ways in.</h2><div className="info-grid">{productData.map(p => <article className="info-card" key={p[0]}><span className="overline">{p[4]}</span><h3>{p[0]}</h3><p>{p[1]}</p></article>)}</div></section>
+    <section className="info-section"><span className="overline">HOW IT FITS TOGETHER</span><h2>From curiosity to capability.</h2><div className="info-grid">{journey.map(j => <article className="info-card step" key={j[0]}><b>{j[0]}</b><h3>{j[1]}</h3><p>{j[2]}</p></article>)}</div></section>
+    <section className="info-section"><span className="overline">HOW WE WORK</span><h2>Our principles.</h2><div className="info-grid four">{principles.map(p => <article className="info-card" key={p[0]}><h3>{p[0]}</h3><p>{p[1]}</p></article>)}</div></section>
+    <section className="info-section"><span className="overline">WHO WE WORK WITH</span><h2>Built for every team that touches AI.</h2><div className="chip-row">{teams.map(t => <span key={t}>{t}</span>)}</div></section>
+    <section className="plan-strip"><span>LET'S TALK</span><b>Tell us where AI could move your team forward.</b><button onClick={() => setView('contact')}>Contact us →</button></section>
+  </InfoPage>
+}
+
+function ContactPage({ setView }: { setView: (view: View) => void }) {
+  const [sent, setSent] = useState(false)
+  return <InfoPage setView={setView} current="contact" kicker="CONTACT" title={<>Talk to<br/><em>our team.</em></>} lead="Questions about plans, security or an Advisory engagement? Tell us a little and we'll reply within one business day.">
+    <section className="info-section contact-wrap">{sent
+      ? <div className="info-card"><span className="overline">MESSAGE RECEIVED</span><h3>Thank you.</h3><p>We've got your note and will get back to you within one business day.</p><button className="primary-btn" onClick={() => setView('home')}>Back to home <Arrow/></button></div>
+      : <form className="form contact-form" onSubmit={e => { e.preventDefault(); setSent(true) }}>
+        <label>Full name<input required placeholder="Your name" /></label>
+        <label>Work email<input required type="email" placeholder="you@company.com" /></label>
+        <label>Company<input placeholder="Company name" /></label>
+        <label>I'm interested in<select defaultValue="Advisory">{['Studio', 'Academy', 'Advisory', 'Something else'].map(x => <option key={x}>{x}</option>)}</select></label>
+        <label>How can we help?<textarea required rows={5} placeholder="Tell us about your team and goals" /></label>
+        <button className="primary-btn" type="submit">Send message <Arrow/></button>
+      </form>}</section>
+  </InfoPage>
+}
+
+function SecurityPage({ setView }: { setView: (view: View) => void }) {
+  const items: [string, string][] = [
+    ['Data protection', 'Data is encrypted in transit and at rest. Workspaces are isolated per organization.'],
+    ['Access control', 'Role-based permissions, team workspaces and single sign-on for larger organizations.'],
+    ['Responsible AI', 'Answers can be grounded in your own sources, and your content is not used to train public models.'],
+    ['Reliability', 'Monitored infrastructure, regular backups and clear incident communication.']
+  ]
+  return <InfoPage setView={setView} current="security" kicker="SECURITY" title={<>Built to be<br/><em>trusted.</em></>} lead="Enterprise-grade protection for the work your team does with AI.">
+    <section className="info-section"><div className="info-grid four">{items.map(p => <article className="info-card" key={p[0]}><h3>{p[0]}</h3><p>{p[1]}</p></article>)}</div></section>
+    <section className="plan-strip"><span>SECURITY REVIEW</span><b>Need a questionnaire answered or a security overview?</b><button onClick={() => setView('contact')}>Contact sales →</button></section>
+  </InfoPage>
+}
+
+const legalDocs: Record<'privacy' | 'terms', { kicker: string; title: string; lead: string; sections: [string, string][] }> = {
+  privacy: {
+    kicker: 'PRIVACY POLICY', title: 'Your privacy matters.', lead: 'Last updated: October 27, 2026',
+    sections: [
+      ['Information we collect', 'Account details you provide (such as name and work email), usage information about how you use our products, and content you submit to the services.'],
+      ['How we use information', 'To provide and improve BitwisePlus, secure our services, communicate with you, and meet legal obligations. We do not sell your personal information.'],
+      ['Sharing', 'We share information only with service providers who help us operate the services, when required by law, or with your consent.'],
+      ['Retention and your rights', 'We keep information as long as needed to provide the services. You may request access, correction or deletion of your personal information by contacting us.'],
+      ['Contact', 'Questions about this policy can be sent through our Contact page.']
+    ]
+  },
+  terms: {
+    kicker: 'TERMS OF SERVICE', title: 'Terms of Service.', lead: 'Last updated: October 27, 2026',
+    sections: [
+      ['Using the services', 'By creating an account or using BitwisePlus you agree to these terms. You are responsible for the activity on your account and for keeping your credentials secure.'],
+      ['Acceptable use', 'Do not misuse the services, attempt to disrupt them, or use them to violate the law or the rights of others.'],
+      ['Your content', 'You retain ownership of the content you submit. You grant us the limited rights needed to operate the services for you.'],
+      ['Payment', 'Paid plans are billed as described at purchase. Fees are non-refundable except where required by law.'],
+      ['Disclaimer and liability', 'The services are provided "as is". To the extent permitted by law, BitwisePlus is not liable for indirect or consequential damages.'],
+      ['Changes and termination', 'We may update these terms or suspend access for violations. Continued use after changes means you accept the updated terms.']
+    ]
+  }
+}
+
+function LegalPage({ doc, setView }: { doc: 'privacy' | 'terms'; setView: (view: View) => void }) {
+  const d = legalDocs[doc]
+  return <InfoPage setView={setView} current={doc} kicker={d.kicker} title={d.title} lead={d.lead}>
+    <section className="info-section legal">{d.sections.map(s => <div key={s[0]}><h3>{s[0]}</h3><p>{s[1]}</p></div>)}</section>
+  </InfoPage>
+}
+
 const routeToView = (): View => {
   const route = window.location.pathname.replace(/^\/+|\/+$/g, '')
-  return (['products', 'courses', 'signup', 'workspace'] as View[]).includes(route as View) ? route as View : 'home'
+  return (['products', 'courses', 'signup', 'workspace', 'pricing', 'about', 'contact', 'security', 'privacy', 'terms'] as View[]).includes(route as View) ? route as View : 'home'
 }
 
 function App(){
@@ -318,7 +433,7 @@ function App(){
   }, [])
   useEffect(() => {
     if (view === 'workspace') return
-    const targets = document.querySelectorAll<HTMLElement>('.statement,.product-intro,.product-card,.academy-panel,.cta,.stats-band,.catalog-hero,.product-tabs,.product-focus,.plan-strip,.course-hero,.library-head,.course-card,.academy-join,footer')
+    const targets = document.querySelectorAll<HTMLElement>('.statement,.product-intro,.product-card,.academy-panel,.cta,.stats-band,.catalog-hero,.product-tabs,.product-focus,.plan-strip,.course-hero,.library-head,.course-card,.academy-join,.info-section,footer')
     const io = new IntersectionObserver(entries => entries.forEach(en => {
       if (!en.isIntersecting) return
       const el = en.target as HTMLElement
@@ -334,6 +449,6 @@ function App(){
     })
     return () => io.disconnect()
   }, [view])
-  return <><div className="scroll-progress"></div>{view === 'home' ? <Home setView={navigate}/> : view === 'signup' ? <Signup setView={navigate}/> : view === 'products' ? <ProductPage setView={navigate}/> : view === 'courses' ? <CoursesPage setView={navigate}/> : <Workspace setView={navigate}/>}</>
+  return <><div className="scroll-progress"></div>{view === 'home' ? <Home setView={navigate}/> : view === 'signup' ? <Signup setView={navigate}/> : view === 'products' ? <ProductPage setView={navigate}/> : view === 'courses' ? <CoursesPage setView={navigate}/> : view === 'pricing' ? <PricingPage setView={navigate}/> : view === 'about' ? <AboutPage setView={navigate}/> : view === 'contact' ? <ContactPage setView={navigate}/> : view === 'security' ? <SecurityPage setView={navigate}/> : view === 'privacy' || view === 'terms' ? <LegalPage doc={view} setView={navigate}/> : <Workspace setView={navigate}/>}</>
 }
 createRoot(document.getElementById('root')!).render(<App />)

@@ -85,3 +85,61 @@ main{animation:pageIn .6s ease both}
 .path:hover{transform:translateX(6px)}
 @media(max-width:900px){.stats-band{grid-template-columns:repeat(2,1fr);padding:44px 7vw;row-gap:30px}.stats-band div:nth-child(odd){border-left:0;padding-left:0}}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;translate:none}}
+
+/* 公司页面（Pricing / About / Contact / Security / Privacy / Terms） */
+.info-section{padding:70px 10.5vw 20px;background:#f5f4f0}
+.info-section:last-of-type{padding-bottom:90px}
+.info-section>h2{font-size:clamp(30px,3.4vw,46px);letter-spacing:-2px;font-weight:500;margin:12px 0 34px}
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.info-grid.four{grid-template-columns:repeat(4,1fr)}
+.info-card{background:#fff;border:1px solid #e0ded7;border-radius:8px;padding:26px;display:flex;flex-direction:column;gap:10px;transition:transform .3s ease,box-shadow .3s ease}
+.info-card:hover{transform:translateY(-5px);box-shadow:0 18px 30px rgba(25,24,27,.1)}
+.info-card h3{font-size:25px;letter-spacing:-1px;margin:6px 0 0}
+.info-card p{color:#625f5b;font-size:15px;line-height:1.55;margin:0}
+.info-card ul{list-style:none;padding:0;margin:6px 0 14px}
+.info-card li{padding:6px 0;font-size:14px}
+.info-card li span{color:#8367f0;margin-right:10px}
+.info-card .primary-btn{margin-top:auto;align-self:flex-start}
+.plan-price strong{font-size:42px;letter-spacing:-2px;font-weight:500}
+.plan-price small{display:block;color:#77756f;font-size:12px;margin-top:2px}
+.table-wrap{overflow-x:auto}
+.plan-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #e0ded7;font-size:14px}
+.plan-table th,.plan-table td{padding:16px 20px;text-align:left;border-bottom:1px solid #eeede7}
+.plan-table thead th{font-size:16px}
+.plan-table tbody th{font:11px 'DM Mono',monospace;letter-spacing:.8px;color:#77756f;text-transform:uppercase;width:20%}
+.faq{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 40px}
+.faq b{font-size:16px}
+.faq p{color:#625f5b;font-size:14px;line-height:1.55;margin:6px 0 14px}
+.contact-wrap{display:flex}
+.contact-wrap>*{width:min(640px,100%)}
+.contact-form{margin-top:0}
+.contact-form select,.contact-form textarea{margin-top:8px;width:100%;border:1px solid #cbc9c1;border-radius:3px;padding:12px 14px;font:inherit;font-size:14px;background:#fff}
+.contact-form select{height:50px}
+.contact-form .primary-btn{margin-top:10px}
+.legal{max-width:860px;margin:0 auto 0 0}
+.legal h3{font-size:20px;margin:26px 0 6px;letter-spacing:-.5px}
+.legal p{color:#55524f;line-height:1.65;margin:0}
+@media(max-width:900px){.info-section{padding:50px 7vw 10px}.info-grid,.info-grid.four,.faq{grid-template-columns:1fr}}
+
+/* About 页补充：Hero 右侧视觉、使命、步骤、团队标签 */
+.catalog-hero.with-aside{display:grid;grid-template-columns:1.1fr .9fr;gap:5vw;align-items:center;padding-top:70px;padding-bottom:60px}
+.about-visual{position:relative;height:340px;border-radius:10px;background:radial-gradient(circle at 50% 50%,#2a263e,#16161b 72%);overflow:hidden;box-shadow:0 24px 50px rgba(30,24,60,.22)}
+.av-ring{position:absolute;left:50%;top:50%;border:1px solid rgba(222,214,255,.28);border-radius:50%;transform:translate(-50%,-50%)}
+.av-ring.r1{width:200px;height:200px}
+.av-ring.r2{width:320px;height:320px;border-style:dashed;animation:avSpin 40s linear infinite}
+@keyframes avSpin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.av-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:#d7ff43;color:#16161b;display:grid;place-items:center;font-size:26px;animation:pulseGlow 3s infinite}
+.av-chip{position:absolute;padding:8px 14px;border-radius:20px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);color:#fff;font:11px 'DM Mono',monospace;letter-spacing:.8px;animation:avFloat 5s ease-in-out infinite}
+.av-chip.c1{left:12%;top:24%}
+.av-chip.c2{right:10%;top:40%;animation-delay:-1.6s}
+.av-chip.c3{left:26%;bottom:16%;animation-delay:-3.2s}
+@keyframes avFloat{50%{transform:translateY(-10px)}}
+.info-section.mission{display:grid;grid-template-columns:200px 1fr;gap:40px;align-items:start;padding-top:56px;padding-bottom:30px;border-top:1px solid #e3e1da}
+.mission p{margin:0;font:clamp(26px,3vw,40px)/1.25 'Playfair Display',serif;letter-spacing:-1px;max-width:900px}
+.info-card.step b{font:34px 'Playfair Display',serif;font-weight:500;color:#8367f0}
+.chip-row{display:flex;flex-wrap:wrap;gap:12px}
+.chip-row span{padding:12px 20px;border:1px solid #cfcdc5;border-radius:30px;background:#fff;font-size:15px;transition:background .25s ease,color .25s ease,transform .25s ease}
+.chip-row span:hover{background:#17171b;color:#fff;transform:translateY(-3px)}
+.catalog-hero.with-aside~.info-section{padding-top:56px}
+@media(max-width:900px){.catalog-hero.with-aside{grid-template-columns:1fr}.about-visual{height:260px}.info-section.mission{grid-template-columns:1fr;gap:12px}}
+@media(max-width:900px){.catalog-page footer,.courses-page footer{flex-wrap:wrap;gap:15px}.catalog-page footer>div,.courses-page footer>div{flex-wrap:wrap}}
